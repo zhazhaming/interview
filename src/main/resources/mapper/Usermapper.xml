@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.Mapper.Usermapper" >
+
+    <select id="getUserWalletInfo" parameterType="Integer" resultMap="Wallet">
+        select * from wallet where user_id = #{userId};
+    </select>
+
+    <select id="getUserbalance" parameterType="int" resultType="java.math.BigDecimal">
+        select balance from wallet where id = #{userId};
+    </select>
+
+    <update id="updateWallet" parameterType="com.example.pojo.Wallet">
+        update  wallet set balance = #{wallet.balance} where user_id = #{wallet.userId};
+    </update>
+
+    <resultMap id="Wallet" type="com.example.pojo.Wallet">
+        <id column="id" property="walletId"/>
+        <result column="user_id" property="userId"/>
+        <result column="balance" property="balance"/>
+    </resultMap>
+</mapper>
